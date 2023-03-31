@@ -1,0 +1,54 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <h2>Cart Details</h2>
+      <hr>
+      <div *ngIf="cartItems.length > 0">
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Product Name</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cartItem of cartItems">
+            <td>
+              <img src="{{ cartItem.imageUrl }}" alt="Product Image" width="100" height="50">
+            </td>
+            <td>{{ cartItem.name }}</td>
+            <td>{{ cartItem.unitPrice | currency:"USD" }}</td>
+            <td>
+              <button class="btn btn-sm btn-primary" (click)="decrementQuantity(cartItem)">-</button>
+              <span>{{ "  " + cartItem.quantity + "  " }}</span>
+              <button class="btn btn-sm btn-primary" (click)="incrementQuantity(cartItem)">+</button>
+            </td>
+            <td>{{ cartItem.unitPrice * cartItem.quantity | currency:"USD" }}</td>
+            <td>
+              <button class="btn btn-sm btn-danger" (click)="remove(cartItem)">Remove</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td>Total Quantity
+              <p>{{ totalQuantity }}</p>
+            </td>
+            <td>Shipping Free</td>
+            <td>Total Price
+              <p>{{ totalPrice | currency:"USD" }}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <div *ngIf="cartItems.length == 0" class="alert alert-warning col-md-12" role="alert">
+        Your cart is empty!
+      </div>
+    </div>
+  </div>
+</div>
