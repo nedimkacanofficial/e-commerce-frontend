@@ -169,70 +169,20 @@
             </div>
           </div>
         </div>
+
         <div formGroupName="creditCard" class="form-area">
-          <h2>Credit Card Information</h2>
-          <div class="form-group">
-            <label for="cardType">Card Type</label>
-            <select id="cardType" formControlName="cardType" class="form-control">
-              <option value="visa">Visa</option>
-              <option value="mastercard">MasterCard</option>
-              <option value="amex">American Express</option>
-            </select>
-            <div *ngIf="creditCardType?.invalid && (creditCardType?.dirty || creditCardType?.touched)" class="alert alert-danger mt-2">
-              <div *ngIf="creditCardType?.errors?.['required']">
-                Card Type is required
-              </div>
-            </div>
+          <h3>Credit or Debit Card</h3>
+
+          <div id="card-element">
+
           </div>
-          <div class="form-group">
-            <label for="nameOnCard">Name on Card</label>
-            <input type="text" id="nameOnCard" formControlName="nameOnCard" class="form-control">
-            <div *ngIf="creditCardNameOnCard?.invalid && (creditCardNameOnCard?.dirty || creditCardNameOnCard?.touched)" class="alert alert-danger mt-2">
-              <div *ngIf="creditCardNameOnCard?.errors?.['required'] || creditCardNameOnCard?.errors?.['notOnlyWhiteSpace']">
-                Name on Card is required
-              </div>
-              <div *ngIf="creditCardNameOnCard?.errors?.['minlength']">
-                Name on Card must be at least 2 characters long
-              </div>
-            </div>
+
+          <div id="card-errors" class="displayError.textContent!=='':'alert alert-denger mt-1'">
+
           </div>
-          <div class="form-group">
-            <label for="cardNumber">Card Number</label>
-            <input type="text" id="cardNumber" formControlName="cardNumber" class="form-control">
-            <div *ngIf="creditCardNumber?.invalid && (creditCardNumber?.dirty || creditCardNumber?.touched)" class="alert alert-danger mt-2">
-              <div *ngIf="creditCardNumber?.errors?.['required'] || creditCardNumber?.errors?.['notOnlyWhiteSpace']">
-                Card Number is required
-              </div>
-              <div *ngIf="creditCardNumber?.errors?.['pattern']">
-                Card Number must be 16 digits long
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="securityCode">Security Code</label>
-            <input type="text" id="securityCode" formControlName="securityCode" class="form-control">
-            <div *ngIf="creditCardSecurityCode?.invalid && (creditCardSecurityCode?.dirty || creditCardSecurityCode?.touched)" class="alert alert-danger mt-2">
-              <div *ngIf="creditCardSecurityCode?.errors?.['required'] || creditCardSecurityCode?.errors?.['notOnlyWhiteSpace']">
-                Security Code is required
-              </div>
-              <div *ngIf="creditCardSecurityCode?.errors?.['minlength']">
-                Security Code must be at least 3 characters long
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="expirationMonth">Expiration Month</label>
-            <select id="expirationMonth" formControlName="expirationMonth" class="form-control">
-              <option *ngFor="let item of creditCardMonths">{{ item }}</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="expirationYear">Expiration Year</label>
-            <select id="expirationYear" formControlName="expirationYear" class="form-control" (change)="handleMonthsAndYears()">
-              <option *ngFor="let item of creditCardYears">{{ item }}</option>
-            </select>
-          </div>
+
         </div>
+
         <div class="form-area">
           <h2>Review Your Order</h2>
           <p>Total Quantity: {{ totalQuantity }}</p>
@@ -240,7 +190,7 @@
           <p>Total Price: {{ totalPrice | currency:"USD" }}</p>
         </div>
         <div class="text-center">
-          <button type="submit" class="btn btn-primary">Purchase</button>
+          <button type="submit" class="btn btn-primary" [disabled]="isDisabled">Purchase</button>
         </div>
       </form>
     </div>
